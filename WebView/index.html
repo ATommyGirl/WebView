@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #header {
+            height: 44px;
+            background-color: #4187C5;
+        }
+
+        #header .title {
+            text-align: center;
+            box-sizing: border-box;
+            padding: 0px 40px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #fff;
+            font-weight: bold;
+            line-height: 44px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="title">
+        </div>
+    </header>
+    <div class="content">
+        <a href="b2bjoy://hahha?i=1" title="Emily's Blog">Welcome</a>
+        <button onclick=testAes() name="click me!!!">选我选我</button><br /><br />
+        <button onclick=testAes1() name="back me!!!">返回</button><br /><br />
+        <button onclick=openCamera() name="openCamera">拍照</button><br /><br />
+        <button onclick=scan() name="scan">扫一扫</button><br /><br />
+        <button onclick=scanFromImage() name="scanFromImage">识别图片中的二维码</button><br /><br />
+
+        <button onclick=testGetUserName() name="getUserName">获取用户名</button><br /><br />
+        <button onclick=testGetPassword() name="getPassword">获取密码</button><br /><br />
+
+        <button onclick=testSetValueForKey() name="setkey">错误设置</button><br /><br />
+        <button onclick=testSetValueForKey1() name="setkey">正确设置</button><br /><br />
+        <button onclick=logout() name="setkey">退出登录</button><br /><br />
+        <button onclick=openBDMap() name="setkey">打开百度地图</button><br /><br />
+
+
+    </div>
+
+</body>
+<!--  <script type="text/javascript" src="cordova.js"></script>-->
+<!--    <script type="text/javascript" src="js/index.js"></script>-->
+<script>
+    function testAes() {
+        alert('逗你玩~');
+        MPScheduleManager.add({ "a": "b" }, null, null);
+    }
+
+    function logout() {
+        window.location.href = "b2bjoy://hhh";
+        //MPWebView.logout();
+    }
+
+    function testGetUserName() {
+        MPKeyChain.getValueForKey(
+            MPKeyChain.Constants.USERNAME,
+            function success(result) {
+                alert(result);
+            },
+            function error(error) {
+                alert(error);
+            });
+    }
+
+    function testGetPassword() {
+        MPKeyChain.getValueForKey(
+            MPKeyChain.Constants.PASSWORD,
+            function success(result) {
+                alert(result);
+            },
+            function error(error) {
+                alert(error);
+            });
+    }
+
+    function testSetValueForKey() {
+        MPKeyChain.setValueForKey(
+            "username",
+            "haha",
+            function success(result) {
+                alert(result);
+                MPKeyChain.getValueForKey(
+                    MPKeyChain.Constants.USERNAME,
+                    function success(result) {
+                        alert(result);
+                    },
+                    function error(error) {
+                        alert(error);
+                    });
+
+            },
+            function error(error) {
+                alert(error);
+            });
+    }
+
+
+
+    function testSetValueForKey1() {
+        MPKeyChain.setValueForKey(
+            "key",
+            "haha",
+            function success(result) {
+                alert(result);
+                MPKeyChain.getValueForKey(
+                    "key",
+                    function success(result) {
+                        alert(result);
+                    },
+                    function error(error) {
+                        alert(error);
+                    });
+
+            },
+            function error(error) {
+                alert(error);
+            });
+    }
+
+
+    function testAes1() {
+        window.webkit.messageHandlers.YYWK.postMessage(['MPWebView', 'close', []]);
+    }
+
+    function openCamera() {
+        var myOptions = {
+            quality: 20,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            cameraDirection: Camera.Direction.BACK
+        };
+        function success(imageData) {
+            //user image data
+            alert('user image data');
+        }
+        function error(error) {
+            alert('error is ' + error);
+        }
+        MPCamera.getPicture(success, error, myOptions);
+
+    }
+
+    function scan() {
+        MPBarcodeScanner.scan(
+            function (result) {
+                alert("We got a barcode\n" +
+                    "Result: " + result.text + "\n" +
+                    "Format: " + result.format + "\n" +
+                    "Cancelled: " + result.cancelled);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            },
+            {
+                preferFrontCamera: false, // iOS and Android
+                showFlipCameraButton: true, // iOS and Android
+                showTorchButton: true, // iOS and Android
+                torchOn: false, // Android, launch with the torch switched on (if available)
+                saveHistory: false, // Android, save scan history (default false)
+                prompt: "请将二维码/条形码放入框内,即可扫描", // Android
+                resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+                formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+                orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+                disableAnimations: false, // iOS
+                disableSuccessBeep: false // iOS and Android
+            }
+        );
+
+    }
+
+    function scanFromImage() {
+        MPBarcodeScanner.recognizeFromImage(
+            function (result) {
+                alert("We got a barcode\n" +
+                    "Result: " + result.text + "\n" +
+                    "Format: " + result.format + "\n" +
+                    "Cancelled: " + result.cancelled);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            }
+        );
+    }
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+    
+    function openBDMap(){
+        MPLocation.openBDMap();
+    }
+    
+    var header = document.getElementById('header');
+    var headerColor = GetQueryString("colorName");
+    header.style.backgroundColor = '#' + headerColor;
+</script>
+
+</html>
