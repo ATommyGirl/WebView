@@ -20,6 +20,7 @@
 		587FD24226BA375700C45532 /* WKWebViewSecController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587FD24126BA375700C45532 /* WKWebViewSecController.m */; };
 		587FD24726BA3A1600C45532 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587FD24626BA3A1600C45532 /* WebKit.framework */; };
 		587FD24A26BA40C400C45532 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 587FD24926BA40C400C45532 /* index.html */; };
+		58A4D69B26CFB62D00621648 /* client.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 58A4D69A26CFB62D00621648 /* client.p12 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		587FD24126BA375700C45532 /* WKWebViewSecController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewSecController.m; sourceTree = "<group>"; };
 		587FD24626BA3A1600C45532 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		587FD24926BA40C400C45532 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		58A4D69A26CFB62D00621648 /* client.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; name = client.p12; path = ../../../Me/YYBlog/Client/client.p12; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				587FD23D26BA374B00C45532 /* UIWebViewSecController.m */,
 				587FD24026BA375700C45532 /* WKWebViewSecController.h */,
 				587FD24126BA375700C45532 /* WKWebViewSecController.m */,
+				58A4D69A26CFB62D00621648 /* client.p12 */,
 				587FD24926BA40C400C45532 /* index.html */,
 				587FD22326BA35FD00C45532 /* Main.storyboard */,
 				587FD22626BA360500C45532 /* Assets.xcassets */,
@@ -171,6 +174,7 @@
 				587FD24A26BA40C400C45532 /* index.html in Resources */,
 				587FD22726BA360500C45532 /* Assets.xcassets in Resources */,
 				587FD22526BA35FD00C45532 /* Main.storyboard in Resources */,
+				58A4D69B26CFB62D00621648 /* client.p12 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,8 +335,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NEHH7XQE6G;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NTDRU2P6T4;
 				INFOPLIST_FILE = WebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -341,6 +346,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = YY.WebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Mocha4DevAllDevProfile;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -350,8 +356,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NEHH7XQE6G;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NTDRU2P6T4;
 				INFOPLIST_FILE = WebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,6 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = YY.WebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Mocha4DevAllDevProfile;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

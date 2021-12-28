@@ -24,7 +24,7 @@
     self.title = @"WKWebView";
     
     WKUserContentController *userContentController = [[WKUserContentController alloc] init];
-    [userContentController addScriptMessageHandler:self name:YYWK_BRIDGE_NAME];
+//    [userContentController addScriptMessageHandler:self name:YYWK_BRIDGE_NAME];
     
     WKWebViewConfiguration *configuration = ({
         configuration = [[WKWebViewConfiguration alloc] init];
@@ -37,19 +37,16 @@
             [configuration setValue:@YES forKey:@"allowUniversalAccessFromFileURLs"];
         }
         if (@available(iOS 14.0, *)) {
-            //configuration.defaultWebpagePreferences.allowsContentJavaScript = YES;
+            configuration.defaultWebpagePreferences.allowsContentJavaScript = YES;
         }else {
             configuration.preferences.javaScriptEnabled = YES;
         }
         [configuration.websiteDataStore.httpCookieStore addObserver:self];
-        // IF use MX-auth, open this line to add headers.
-        //[configuration yy_RegisterURLProtocol:[CQWKURLProtocol class]];
         configuration;
     });
     
     WKWebView *webView = ({
         webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:configuration];
-        webView.scrollView.bounces = NO;
         webView.UIDelegate = self;
         webView.navigationDelegate = self;
         webView.backgroundColor = [UIColor whiteColor];
@@ -59,8 +56,8 @@
     self.webView = webView;
     [self.view addSubview:webView];
     
+    //用于测试 cookie 同步问题
     NSString *url = @"https://myaccount.google.com/personal-info";
-    
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
@@ -175,7 +172,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler{
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
